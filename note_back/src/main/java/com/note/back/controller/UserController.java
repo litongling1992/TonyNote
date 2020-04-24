@@ -12,12 +12,17 @@ package com.note.back.controller;
 
 import com.note.back.pojo.User;
 import com.note.back.service.UserService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.HtmlUtils;
+
+import javax.security.auth.Subject;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -56,6 +61,22 @@ public class UserController {
         user.setPassword(pwdAfterHash);
         userService.addUser(user);
         return "注册成功";
+    }
+
+    @CrossOrigin
+    @PostMapping("api/login")
+    @ResponseBody
+    public String login(@RequestBody User user){
+        String userName=user.getUsername();
+        org.apache.shiro.subject.Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userName,user.getPassword());
+         try {
+             subject.login(usernamePasswordToken);
+             return "OK";
+
+         }catch (AuthenticationException e){
+             return "Error";
+         }
     }
 
 }
