@@ -40,12 +40,23 @@
          }
          this.axios.post('/login',postData)
          .then(function (respone){
-           console.log(respone);
-           that.loginForm.states = respone.data;
+            //console.log(respone.data);
+           console.log(respone.data.status);
+           if(respone.data.status == 200){
+
+             that.loginForm.states = respone.data.msg;
+             console.log(respone.data.msg);
+             that.$store.commit(types.ADD_BIAOTI,respone.data.object);
+              that.$router.push('/');
+           }else{
+             alert("账号或密码错误...")
+           }
+
+
          })
          .catch(function(error){
            console.log(error);
-           that.loginForm.states = respone.data;
+           that.loginForm.states = respone.data.msg;
          })
        }
     }
