@@ -6,7 +6,6 @@ import router from './router'
 //一定要使用“vue-router”
 //import store from "vue-router"
 
-
 import store from './store'
 
 import ElementUI from 'element-ui'

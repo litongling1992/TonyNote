@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+	<!--  <h4>{{this.$store.state.currentUser.username}}</h4> -->
     <h1>{{ msg }}</h1>
     <h2>Essential Links</h2>
     <ul>

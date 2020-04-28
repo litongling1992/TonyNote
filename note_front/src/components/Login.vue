@@ -1,8 +1,10 @@
 <template>
   <body id="poster">
+  
   <el-form class="login-container" label-position="left"
            label-width="0px">
     <h3 class="login_title">系统登录</h3>
+
     <el-form-item>
       <el-input type="text" v-model="loginForm.username"
                 auto-complete="off" placeholder="账号"></el-input>
@@ -13,6 +15,7 @@
     </el-form-item>
     <el-form-item style="width: 100%">
       <el-button type="primary" style="width: 100%;background: #505458;border: none" v-on:click="login">登录</el-button>
+
     </el-form-item>
   </el-form>
   </body>
@@ -46,12 +49,12 @@
 
              that.loginForm.states = respone.data.msg;
              console.log(respone.data.msg);
-             that.$store.commit(types.ADD_BIAOTI,respone.data.object);
+              that.$store.commit("saveUser",respone.data.object);
+              that.$store.commit("addmu");
               that.$router.push('/');
            }else{
              alert("账号或密码错误...")
            }
-
 
          })
          .catch(function(error){
