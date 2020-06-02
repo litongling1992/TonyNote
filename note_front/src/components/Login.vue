@@ -1,30 +1,29 @@
 <template>
   <body id="poster">
-  
-  <el-form class="login-container" label-position="left"
-           label-width="0px">
-    <h3 class="login_title">系统登录</h3>
 
-    <el-form-item>
-      <el-input type="text" v-model="loginForm.username"
-                auto-complete="off" placeholder="账号"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-input type="password" v-model="loginForm.password"
-                auto-complete="off" placeholder="密码"></el-input>
-    </el-form-item>
-    <el-form-item style="width: 100%">
-      <el-button type="primary" style="width: 100%;background: #505458;border: none" v-on:click="login">登录</el-button>
+    <el-form class="login-container" label-position="left" label-width="0px">
+      <h3 class="login_title">系统登录</h3>
 
-    </el-form-item>
-  </el-form>
+      <el-form-item>
+        <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="账号"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-input type="password" v-model="loginForm.password" auto-complete="off" placeholder="密码"></el-input>
+      </el-form-item>
+      <el-form-item style="width: 100%">
+        <el-button type="primary" class="form-confirm" v-on:click="login">登录</el-button>
+      </el-form-item>
+      <el-form-item>
+          <el-button type="primary"  class="form-confirm" @click="toReginster">去注册</el-button>
+      </el-form-item>
+    </el-form>
   </body>
 </template>
 
 <script>
-  export default{
+  export default {
     name: "Login",
-    data(){
+    data() {
       return {
         loginForm: {
           username: '',
@@ -34,34 +33,36 @@
         responseResult: []
       }
     },
-    methods:{
-       login(){
-         let that = this ;
-         let postData={
-           username: this.loginForm.username,
-           password: this.loginForm.password,
-         }
-         this.axios.post('/login',postData)
-         .then(function (respone){
-            //console.log(respone.data);
-           console.log(respone.data.status);
-           if(respone.data.status == 200){
+    methods: {
+      login() {
+        let that = this;
+        let postData = {
+          username: this.loginForm.username,
+          password: this.loginForm.password,
+        }
+        this.axios.post('/login', postData)
+          .then(function(respone) {
+            console.log(respone.data.status);
+            if (respone.data.status == 200) {
 
-             that.loginForm.states = respone.data.msg;
-             console.log(respone.data.msg);
-              that.$store.commit("saveUser",respone.data.object);
-              that.$store.commit("addmu");
-              that.$router.push('/');
-           }else{
-             alert("账号或密码错误...")
-           }
+              that.loginForm.states = respone.data.msg;
+              console.log(respone.data.msg);
+              that.$store.commit("saveUser", respone.data.object);
+              that.$router.push('/home');
+            } else {
+              alert("账号或密码错误...")
+            }
 
-         })
-         .catch(function(error){
-           console.log(error);
-           that.loginForm.states = respone.data.msg;
-         })
-       }
+          })
+          .catch(function(error) {
+            console.log(error);
+            that.loginForm.states = respone.data.msg;
+          })
+      },
+      toReginster(){
+        this.$router.replace('/register');
+      }
+
     }
   }
 </script>
@@ -83,7 +84,8 @@
     text-align: center;
     color: #505458;
   }
-  #poster{
+
+  #poster {
     background: url("../assets/logo.png") no-repeat;
     background-position: center;
     height: 100%;
@@ -91,4 +93,10 @@
     background-size: cover;
     position: fixed;
   }
+  .form-confirm{
+      width: 100%;
+      background-color: #585858;
+      border: 2px solid #484848;
+      border-radius: 4px;
+    }
 </style>
