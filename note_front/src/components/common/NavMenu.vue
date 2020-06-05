@@ -2,6 +2,7 @@
   <el-row class="container">
     <!-- 头部-->
     <el-col :span="24" class="topbar-wrap">
+
       <div class="topbar-logo topbar-btn">
         <img src="../../assets/logo.png" style="padding-left:8px;">
       </div>
@@ -10,17 +11,22 @@
         <label style="color: #fff;">在线云笔记</label>
       </div>
       <div class="topbar-title">
-        <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal" @select="handleSelect"
-           text-color="#fff" active-text-color="#ffd04b">
-          <el-menu-item index="1">主页</el-menu-item>
-          <el-menu-item index="2">书架</el-menu-item>
-          <el-menu-item index="3">个人中心</el-menu-item>
+        <el-menu  class="el-menu-demo"
+        mode="horizontal"
+        @select="handleSelect"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        router
+        :default-active="'/home'">
+          <el-menu-item v-for="(item,i) in naviList" :index="item.url" :key="i">
+            {{ item.name}}
+          </el-menu-item>
         </el-menu>
       </div>
          <div class="topbar-account topbar-btn">
               <el-dropdown trigger="click">
                 <span class="el-dropdown-link userinfo-inner">
-                  <i class="iconfont icon-user"></i> {{nickname}}   <i class="el-icon-caret-bottom"></i></span>
+                  <i class="iconfont icon-user"></i>  <i class="el-icon-caret-bottom"></i></span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>
                     <div @click="jumpTo('/user/profile')"><span style="color: #555;font-size: 14px;">个人信息</span></div>
@@ -42,8 +48,10 @@
     name: "NavMenu",
     data() {
       return {
-        activeIndex: '1',
-        activeIndex2: '2'
+        naviList: [
+          {name: "首页", url: '/home'},
+          {name: "书架", url: '/booksheef'},
+        ]
       };
     },
     methods: {

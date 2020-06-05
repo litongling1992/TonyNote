@@ -2,8 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Register from '@/components/Register'
-import Login from'@/components/Login'
-import Index from'@/components/Index'
+import Login from '@/components/Login'
+import Index from '@/components/Index'
+import BookSheef from '@/components/booksheef/BookSheef.vue'
+import CategoryBar from '@/components/booksheef/CategoryBar.vue'
+import Notes from '@/components/booksheef/notes.vue'
 
 //import Index from'@/components/common/NavMenu'
 //import NavMenu from "./common/NavMenu";
@@ -34,11 +37,16 @@ export default new Router({
       name: 'Index',
       component: Index,
       redirect: '/home',
-      children:[
+      children: [
         {
           path: '/home',
           name: 'Home',
           component: Home
+        },
+        {
+          path: '/booksheef',
+          name: 'BookSheef',
+          component: BookSheef
         },
       ]
     },
