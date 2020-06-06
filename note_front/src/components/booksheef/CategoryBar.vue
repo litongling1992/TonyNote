@@ -28,7 +28,8 @@
     },
     methods: {
       handleClick() {
-        console.log(this.currentCid);
+        console.log("Test: " + this.currentCid);
+        this.$emit('categorySelect');
       }
     }
   }

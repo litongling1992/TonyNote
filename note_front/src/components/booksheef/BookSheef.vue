@@ -4,41 +4,58 @@
     </el-tab-pane>
   </el-tabs> -->
   <div style="margin-left: 10px">
-    <category-bar>
+    <category-bar @categorySelect="getNotes" ref="categoryBar">
 
     </category-bar>
+    <notes>
+
+    </notes>
   </div>
 </template>
 
 <script>
-
-   import Notes from "./notes";
-    import CategoryBar from "./CategoryBar";
+  import Notes from "./notes";
+  import CategoryBar from "./CategoryBar";
   export default {
     name: "BookSheef",
-    components: { Notes,CategoryBar },
+    components: {
+      Notes,
+      CategoryBar
+    },
     data() {
       return {
         //categories: [],
       };
     },
-   /*    mounted() {
-      var _this = this;
-      this.axios.get("/categories")
-        .then(function(response) {
-          if (response.status === 200) {
-            _this.categories = response.data
-          }
-          console.log(response);
-        })
-    },
+    /*    mounted() {
+       var _this = this;
+       this.axios.get("/categories")
+         .then(function(response) {
+           if (response.status === 200) {
+             _this.categories = response.data
+           }
+           console.log(response);
+         })
+     },
+     methods: {
+       handleClick(tab, event) {
+         console.log(tab, event);
+       }
+     } */
     methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
+
+      getNotes() {
+        console.log("Ok");
+        var categoryBar = this.$refs.categoryBar.currentCid;
+        console.log(categoryBar);
       }
-    } */
+
+    }
   }
 </script>
 
 <style>
+  .el-tbas_item {
+    height: 20px;
+  }
 </style>

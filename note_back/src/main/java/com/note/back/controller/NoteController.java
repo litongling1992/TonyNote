@@ -46,19 +46,28 @@ import java.util.UUID;
 @Controller
 public class NoteController {
 
-   // @Autowired
-   // CategoryService categoryService;
+    @Autowired
+    CategoryService categoryService;
 
-   // @Autowired
-   // NoteService noteService;
+    @Autowired
+    NoteService noteService;
 
-   /* @CrossOrigin
+    @CrossOrigin
     @GetMapping("/api/categories")
     @ResponseBody
     public List<Category> getCategoryList(){
-        org.apache.shiro.subject.Subject subject = SecurityUtils.getSubject();
-        return categoryService.getAllByUser((User)subject.getPrincipal());
-    }*/
+       // org.apache.shiro.subject.Subject subject = SecurityUtils.getSubject();
+       // return categoryService.getAllByUser((User)subject.getPrincipal());
+        List<Category> categories = categoryService.getAll();
+        return categories;
+    }
+    @CrossOrigin
+    @GetMapping("/api/category/delete/{id}")
+    @ResponseBody
+    public List<Note> getNotesById(@PathVariable("id") int id){
+        List<Note> category = noteService.getNoteByCategory(id);
+      return category;
+    }
 
    /* @CrossOrigin
     @GetMapping("/api/category/delete/{id}")
