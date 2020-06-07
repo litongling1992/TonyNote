@@ -47,7 +47,7 @@ public class NoteService {
         return noteDao.findAllByCategory(category);
     }
 
-    public Note getById(int id){
+    /*public Note getById(int id){
         return noteDao.findById(id).get();
     }
 
@@ -57,5 +57,5 @@ public class NoteService {
 
     public void updateNote(Note note){
         noteDao.save(note);
-    }
+    }*/
 }

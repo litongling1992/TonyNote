@@ -61,12 +61,13 @@ public class NoteController {
         List<Category> categories = categoryService.getAll();
         return categories;
     }
+
     @CrossOrigin
-    @GetMapping("/api/category/delete/{id}")
+    @GetMapping("/api/categories/{id}/notes")
     @ResponseBody
     public List<Note> getNotesById(@PathVariable("id") int id){
-        List<Note> category = noteService.getNoteByCategory(id);
-      return category;
+        //List<Note> category = noteService.getNoteByCategory(id);
+      return noteService.getNoteByCategory(id);
     }
 
    /* @CrossOrigin

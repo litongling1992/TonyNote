@@ -35,11 +35,11 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
 
-    @CrossOrigin
+    /*@CrossOrigin
     @ResponseBody
     @GetMapping("/api/categories")
     public List<Category> getAll(){
         List<Category> c =  categoryService.getAll();
         return c;
-    }
+    }*/
 }

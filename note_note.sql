@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2020-06-06 16:26:09
+Date: 2020-06-07 17:04:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -36,7 +36,7 @@ INSERT INTO `category` VALUES ('2', '测试2');
 -- ----------------------------
 DROP TABLE IF EXISTS `note`;
 CREATE TABLE `note` (
-  `id` int(10) NOT NULL,
+  `id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `abs` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   `content_html` longtext CHARACTER SET utf8 COLLATE utf8_general_ci,
@@ -50,13 +50,15 @@ CREATE TABLE `note` (
   KEY `note_ibfk_2` (`category`),
   CONSTRAINT `note_ibfk_1` FOREIGN KEY (`author`) REFERENCES `user` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `note_ibfk_2` FOREIGN KEY (`category`) REFERENCES `category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of note
 -- ----------------------------
-INSERT INTO `note` VALUES ('1', 'n1', null, null, null, '4', '1', null, null);
-INSERT INTO `note` VALUES ('2', 'n2', null, null, null, '4', '2', null, null);
+INSERT INTO `note` VALUES ('1', 'Vue开发', '简介Vue', null, null, '4', '1', '2020-06-07 15:51:20', '2020-06-06 15:51:26');
+INSERT INTO `note` VALUES ('2', 'SpringBoot介绍', '简介Spring', null, null, '4', '2', '2020-06-07 15:51:34', '2020-06-05 15:51:37');
+INSERT INTO `note` VALUES ('3', 'Js与Svg技术简介', '简介Js', null, null, '4', '1', '2020-06-07 15:51:47', '2020-06-04 15:51:51');
+INSERT INTO `note` VALUES ('4', 'Python从入门到放弃', '简介Python', null, null, '4', '1', '2020-06-07 15:51:56', '2020-06-04 15:52:00');
 
 -- ----------------------------
 -- Table structure for `test`

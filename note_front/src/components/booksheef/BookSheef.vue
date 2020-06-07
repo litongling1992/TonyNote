@@ -7,7 +7,7 @@
     <category-bar @categorySelect="getNotes" ref="categoryBar">
 
     </category-bar>
-    <notes>
+    <notes ref="notes">
 
     </notes>
   </div>
@@ -45,9 +45,18 @@
     methods: {
 
       getNotes() {
-        console.log("Ok");
-        var categoryBar = this.$refs.categoryBar.currentCid;
-        console.log(categoryBar);
+        var _this = this;
+        var categoryBarId = this.$refs.categoryBar.currentCid;
+        console.log("Get CategoryId Ok: " + categoryBarId);
+        //根据id获取目录内容
+        this.axios.get('categories/' + categoryBarId + '/notes')
+        .then( function(response){
+          if(response.status===200){
+            //console.log(_this.$refs.notes.notes);
+            _this.$refs.notes.notes = response.data;
+          }
+          
+        })
       }
 
     }

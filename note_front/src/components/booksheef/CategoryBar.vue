@@ -28,7 +28,7 @@
     },
     methods: {
       handleClick() {
-        console.log("Test: " + this.currentCid);
+        //console.log("Test: " + this.currentCid);
         this.$emit('categorySelect');
       }
     }
