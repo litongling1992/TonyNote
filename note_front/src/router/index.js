@@ -7,6 +7,8 @@ import Index from '@/components/Index'
 import BookSheef from '@/components/booksheef/BookSheef.vue'
 import CategoryBar from '@/components/booksheef/CategoryBar.vue'
 import Notes from '@/components/booksheef/notes.vue'
+import PageTest from '@/components/PageTest'
+import NotesTest from '@/components/booksheef/NotesTest.vue'
 
 //import Index from'@/components/common/NavMenu'
 //import NavMenu from "./common/NavMenu";
@@ -22,6 +24,11 @@ export default new Router({
     //   name: 'HelloWorld',
     //   component: HelloWorld
     // },
+    {
+      path: '/pagetest',
+      name: 'PageTest',
+      component: PageTest
+    },
     {
       path: '/register',
       name: 'Register',

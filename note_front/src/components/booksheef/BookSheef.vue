@@ -7,20 +7,23 @@
     <category-bar @categorySelect="getNotes" ref="categoryBar">
 
     </category-bar>
-    <notes ref="notes">
+   <notes ref="notes">
 
     </notes>
+<!-- <NotesTest ref="notestest"></NotesTest> -->
   </div>
 </template>
 
 <script>
   import Notes from "./notes";
+  //import NotesTest from"./NotesTest"
   import CategoryBar from "./CategoryBar";
   export default {
     name: "BookSheef",
     components: {
       Notes,
-      CategoryBar
+      CategoryBar,
+      //NotesTest
     },
     data() {
       return {
@@ -53,9 +56,10 @@
         .then( function(response){
           if(response.status===200){
             //console.log(_this.$refs.notes.notes);
-            _this.$refs.notes.notes = response.data;
+           _this.$refs.notes.notes = response.data;
+         // _this.$refs.notestest.notes = response.data;
           }
-          
+
         })
       }
 

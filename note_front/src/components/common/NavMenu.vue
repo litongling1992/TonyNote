@@ -1,20 +1,39 @@
 <template>
-  <el-row class="container">
-    <!-- 头部-->
-    <el-col :span="24" class="topbar-wrap">
+  <div class="navibar">
+    <el-menu  class="el-menu-demo"
+    mode="horizontal"
+    @select="handleSelect"
+    text-color="#fff"
+    background-color="#363738"
+    active-text-color="#ffd04b"
+    router
+    :default-active="'/home'">
+      <el-menu-item v-for="(item,i) in naviList" :index="item.url" :key="i">
+        {{ item.name}}
+      </el-menu-item>
+    </el-menu>
+     <el-submenu index="2" style="float:right;">
+           <i>hhhhh</i>
+     </el-submenu>
+  </div>
 
-      <div class="topbar-logo topbar-btn">
+
+
+ <!-- <el-row class="container"> -->
+    <!-- 头部-->
+   <!-- <el-col :span="24" class="topbar-wrap"> -->
+      <!-- <div class="topbar-logo topbar-btn">
         <img src="../../assets/logo.png" style="padding-left:8px;">
       </div>
       <div class="topbar-logos">
-        <!-- <span>在线云笔记</span> -->
         <label style="color: #fff;">在线云笔记</label>
-      </div>
-      <div class="topbar-title">
+      </div> -->
+
+      <!-- <div class="topbar-title">
         <el-menu  class="el-menu-demo"
         mode="horizontal"
         @select="handleSelect"
-        text-color="#fff"
+        text-color="#000"
         active-text-color="#ffd04b"
         router
         :default-active="'/home'">
@@ -38,8 +57,9 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
-    </el-col>
-  </el-row>
+    </el-col> -->
+  <!-- </el-row> -->
+
 </template>
 
 <script>
@@ -48,9 +68,19 @@
     name: "NavMenu",
     data() {
       return {
-        naviList: [
-          {name: "首页", url: '/home'},
-          {name: "书架", url: '/booksheef'},
+         isLogin:'none',
+                  userFlag: {
+                    name: '',
+                    menuList: []
+                  },
+        naviList: [{
+            name: "首页",
+            url: '/home'
+          },
+          {
+            name: "书架",
+            url: '/booksheef'
+          },
         ]
       };
     },
@@ -60,26 +90,84 @@
       }
     }
   }
+  // <script>
+  // export default {
+  //   name: "TopNaviBar",
+  //   data() {
+  //     return {};
+  //   },
+  //   methods: {
+  //     openTest() {
+  //       this.$confirm("确认退出？")
+  //         .then(_ => {
+  //           done();
+  //         })
+  //         .catch(_ => {});
+  //     }
+  //   }
+  // };
+  //<script>
 </script>
 
 <style>
-  @import url("../../assets/css/style.css");
+  /* @import url("../../assets/css/style.css");
 
   .navibar {
     width: 100%;
     top: 0px;
     left: 0px;
+  } */
+
+ .maincontainer {
+    float: left;
+    width: 100%;
+    height: 50px;
+    margin-top: 0;
+    position: fixed;
+  }
+  .left {
+    background: #333744;
+    width: 190px;
+    height: 50px;
+    float: left;
+    left: 0;
   }
 
-  /* .el-menu-item{
-    //font-weight: bolder !important;
+  .right {
+    background: #2C3E50;
+    width: 88px;
+    height: 50px;
+    float: right;
   }
+
+  /* 中间菜单的div可操作 */
+  .center {
+    background: #00C1DE;
+    width: calc(100% - 300px);
+    height: 50px;
+    color: #fff;
+    float: left;
+    position: relative;
+  }
+
+  .navibar {
+    background-color: #363738;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+  }
+
+  .el-menu-item {
+    font-weight: bolder !important;
+  }
+
   .el-menu--horizontal>.el-menu-item {
-     height: 35px!important;
-     line-height: 35px!important;
-   }
-   .el-menu--horizontal>.el-submenu .el-submenu__title {
-     height: 35px!important;
-     line-height: 35px!important;
-   } */
+    height: 35px !important;
+    line-height: 35px !important;
+  }
+
+  .el-menu--horizontal>.el-submenu .el-submenu__title {
+    height: 35px !important;
+    line-height: 35px !important;
+  }
 </style>
