@@ -5,25 +5,23 @@
   </el-tabs> -->
   <div style="margin-left: 10px">
     <category-bar @categorySelect="getNotes" ref="categoryBar">
-
     </category-bar>
-   <notes ref="notes">
-
+    <notes ref="notes" @editInfo="handleEditInfos">
     </notes>
-<!-- <NotesTest ref="notestest"></NotesTest> -->
+    <note-edit-form ref="noteEditForm" @updateInfo="getNotes"></note-edit-form>
   </div>
 </template>
 
 <script>
   import Notes from "./notes";
-  //import NotesTest from"./NotesTest"
   import CategoryBar from "./CategoryBar";
+  import NoteEditForm from "./NoteEditForm";
   export default {
     name: "BookSheef",
     components: {
       Notes,
       CategoryBar,
-      //NotesTest
+      NoteEditForm,
     },
     data() {
       return {
@@ -46,23 +44,24 @@
        }
      } */
     methods: {
-
       getNotes() {
         var _this = this;
         var categoryBarId = this.$refs.categoryBar.currentCid;
         console.log("Get CategoryId Ok: " + categoryBarId);
         //根据id获取目录内容
         this.axios.get('categories/' + categoryBarId + '/notes')
-        .then( function(response){
-          if(response.status===200){
-            //console.log(_this.$refs.notes.notes);
-           _this.$refs.notes.notes = response.data;
-         // _this.$refs.notestest.notes = response.data;
-          }
+          .then(function(response) {
+            if (response.status === 200) {
+              //console.log(_this.$refs.notes.notes);
+              _this.$refs.notes.notes = response.data;
+            }
 
-        })
-      }
-
+          })
+      },
+      handleEditInfos(noteInfo) {
+        this.$refs.noteEditForm.dialogFormVisible = true;
+        this.$refs.noteEditForm.form = noteInfo;
+      },
     }
   }
 </script>

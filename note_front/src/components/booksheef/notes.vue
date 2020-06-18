@@ -10,7 +10,7 @@
           <el-button class="note-operation" type="text"><i class="el-icon-more"></i></el-button>
         </el-tooltip>
        <el-tooltip transition="0s" class="item" effect="dark" content="编辑笔记标题与简介" placement="top-start">
-         <el-button class="note-operation" type="text"> <i class="el-icon-edit-outline"></i></el-button>
+         <el-button class="note-operation" type="text" @click="editInfo(item)"> <i class="el-icon-edit-outline"></i></el-button>
        </el-tooltip>
       </div>
       <div class="text item note-abs">
@@ -27,6 +27,17 @@
       return {
         notes: []
       };
+    },
+    methods:{
+      editInfo(note){
+        console.log(note);
+        var noteInfos={
+          id: note.id,
+          abs: note.abs,
+          name: note.name,
+        }
+        this.$emit('editInfo',noteInfos);
+      },
     }
   }
 </script>

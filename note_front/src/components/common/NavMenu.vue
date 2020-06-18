@@ -1,65 +1,28 @@
 <template>
-  <div class="navibar">
-    <el-menu  class="el-menu-demo"
-    mode="horizontal"
-    @select="handleSelect"
-    text-color="#fff"
-    background-color="#363738"
-    active-text-color="#ffd04b"
-    router
-    :default-active="'/home'">
+  <el-row class="container">
+    <el-menu class="el-menu-demo" mode="horizontal" @select="handleSelect" text-color="#fff" background-color="#363738"
+      active-text-color="#ffd04b" router :default-active="'/home'">
       <el-menu-item v-for="(item,i) in naviList" :index="item.url" :key="i">
         {{ item.name}}
       </el-menu-item>
+      <el-dropdown trigger="click" style="float: right;outline: none;cursor: pointer;color: #fff;margin-top: 7px;margin-right: 10px;">
+        <span class="el-dropdown-link userinfo-inner">
+          <i class="iconfont icon-user"></i> <i class="el-icon-caret-bottom"></i></span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>
+            <div @click="jumpTo('/user/profile')"><span style="color: #555;font-size: 14px;">个人信息</span></div>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <div @click="jumpTo('/user/changepwd')"><span style="color: #555;font-size: 14px;">修改密码</span></div>
+          </el-dropdown-item>
+          <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <li style="float: right;outline: none;cursor: pointer">
+        <i class="el-icon-full-screen" style="height: 35px;line-height: 35px; color: #fff;margin-right: 40px;" @click="fullScreen"></i>
+      </li>
     </el-menu>
-     <el-submenu index="2" style="float:right;">
-           <i>hhhhh</i>
-     </el-submenu>
-  </div>
-
-
-
- <!-- <el-row class="container"> -->
-    <!-- 头部-->
-   <!-- <el-col :span="24" class="topbar-wrap"> -->
-      <!-- <div class="topbar-logo topbar-btn">
-        <img src="../../assets/logo.png" style="padding-left:8px;">
-      </div>
-      <div class="topbar-logos">
-        <label style="color: #fff;">在线云笔记</label>
-      </div> -->
-
-      <!-- <div class="topbar-title">
-        <el-menu  class="el-menu-demo"
-        mode="horizontal"
-        @select="handleSelect"
-        text-color="#000"
-        active-text-color="#ffd04b"
-        router
-        :default-active="'/home'">
-          <el-menu-item v-for="(item,i) in naviList" :index="item.url" :key="i">
-            {{ item.name}}
-          </el-menu-item>
-        </el-menu>
-      </div>
-         <div class="topbar-account topbar-btn">
-              <el-dropdown trigger="click">
-                <span class="el-dropdown-link userinfo-inner">
-                  <i class="iconfont icon-user"></i>  <i class="el-icon-caret-bottom"></i></span>
-                <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item>
-                    <div @click="jumpTo('/user/profile')"><span style="color: #555;font-size: 14px;">个人信息</span></div>
-                  </el-dropdown-item>
-                  <el-dropdown-item>
-                    <div @click="jumpTo('/user/changepwd')"><span style="color: #555;font-size: 14px;">修改密码</span></div>
-                  </el-dropdown-item>
-                  <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
-                </el-dropdown-menu>
-              </el-dropdown>
-            </div>
-    </el-col> -->
-  <!-- </el-row> -->
-
+  </el-row>
 </template>
 
 <script>
@@ -68,11 +31,11 @@
     name: "NavMenu",
     data() {
       return {
-         isLogin:'none',
-                  userFlag: {
-                    name: '',
-                    menuList: []
-                  },
+        isLogin: 'none',
+        userFlag: {
+          name: '',
+          menuList: []
+        },
         naviList: [{
             name: "首页",
             url: '/home'
@@ -87,7 +50,10 @@
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
-      }
+      },
+      fullScreen(){
+        
+      },
     }
   }
   // <script>
@@ -118,13 +84,14 @@
     left: 0px;
   } */
 
- .maincontainer {
+  .maincontainer {
     float: left;
     width: 100%;
     height: 50px;
     margin-top: 0;
     position: fixed;
   }
+
   .left {
     background: #333744;
     width: 190px;

@@ -70,6 +70,17 @@ public class NoteController {
       return noteService.getNoteByCategory(id);
     }
 
+    @CrossOrigin
+    @PostMapping("/api/update/note/{id}/info")
+    @ResponseBody
+    public Response updateNoteInfo(@RequestBody Note requestNote, @PathVariable("id") int id){
+        Note note = noteService.getById(id);
+        note.setName(requestNote.getName());
+        note.setAbs(requestNote.getAbs());
+        noteService.updateNoteInfo(note);
+        return new Response(200,"更新成功",null);
+    }
+
    /* @CrossOrigin
     @GetMapping("/api/category/delete/{id}")
     @ResponseBody
