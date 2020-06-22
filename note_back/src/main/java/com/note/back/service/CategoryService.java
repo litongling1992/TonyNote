@@ -38,6 +38,11 @@ public class CategoryService {
         return categoryDao.findAll(Sort.by(Sort.Direction.DESC,"id"));
     }
 
+    public Category getOneById(int id){
+
+        return categoryDao.getOne(id);
+    }
+
 
     /*public List<Category> getAllByUser(User author){
 

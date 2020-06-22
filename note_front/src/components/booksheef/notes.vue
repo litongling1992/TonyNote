@@ -1,5 +1,13 @@
 <template>
   <div style="text-align: initial;">
+    <el-card shadow="hover" class="box-card">
+      <div slot="header" class="clearfix">
+        <span>新增笔记</span>
+      </div>
+      <div class="text item">
+        <i class="el-icon-circle-plus-outline addNote-Icon" @click="addNote()"></i>
+      </div>
+    </el-card>
     <el-card shadow="hover" v-for="(item,i) in notes" :key="i" class="box-card">
       <div slot="header" class="clearfix">
         <span class="">{{ item.name }}</span>
@@ -9,14 +17,19 @@
         <el-tooltip transition="0s" class="item" effect="dark" content="查看笔记内容" placement="top-start">
           <el-button class="note-operation" type="text"><i class="el-icon-more"></i></el-button>
         </el-tooltip>
-       <el-tooltip transition="0s" class="item" effect="dark" content="编辑笔记标题与简介" placement="top-start">
-         <el-button class="note-operation" type="text" @click="editInfo(item)"> <i class="el-icon-edit-outline"></i></el-button>
-       </el-tooltip>
+        <el-tooltip transition="0s" class="item" effect="dark" content="编辑笔记标题与简介" placement="top-start">
+          <el-button class="note-operation" type="text" @click="editInfo(item)"> <i class="el-icon-edit-outline"></i></el-button>
+        </el-tooltip>
+        <el-tooltip transition="0s" class="item" effect="dark" content="删除" placement="top-start">
+          <el-button class="note-operation" type="text" @click="editInfo(item)"><i class="el-icon-delete"></i></el-button>
+        </el-tooltip>
       </div>
       <div class="text item note-abs">
         {{ item.abs }}
       </div>
+
     </el-card>
+
   </div>
 </template>
 
@@ -28,15 +41,27 @@
         notes: []
       };
     },
-    methods:{
-      editInfo(note){
+    methods: {
+      editInfo(note) {
         console.log(note);
-        var noteInfos={
+        var noteInfos = {
           id: note.id,
           abs: note.abs,
           name: note.name,
         }
-        this.$emit('editInfo',noteInfos);
+        this.$emit('editInfo', noteInfos);
+      },
+      addNote() {
+        this.$emit('addNote');
+      },
+      deleteNote(note) {
+        console.log(note);
+        var noteInfos = {
+          id: note.id,
+          abs: note.abs,
+          name: note.name,
+        }
+        this.$emit('editInfo', noteInfos);
       },
     }
   }
@@ -62,28 +87,39 @@
   }
 
   .box-card {
-   display: inline-block;
-   width: 30%;
-   margin-left: 5px;
-   margin-right: 5px;
+    display: inline-block;
+    width: 30%;
+    margin-left: 5px;
+    margin-right: 5px;
   }
 
-  .note-operation{
+  .note-operation {
     float: right;
     padding: 3px 0;
     margin-right: 2px;
-    margin-left: 2px!important;
+    margin-left: 2px !important;
   }
- .note-title{
-      font-weight: bolder;
-    }
-.note-abs{
+
+  .note-title {
+    font-weight: bolder;
+  }
+
+  .note-abs {
     font-size: 12px;
     height: 50px;
     cursor: pointer;
   }
-  /*
 
+  .addNote-Icon {
+    font-size: 200%;
+  }
+
+  .addNote-Icon:hover {
+    cursor: pointer;
+    background-color: #00C1DE;
+  }
+
+  /*
     .note-abs{
       font-size: 12px;
       height: 50px;

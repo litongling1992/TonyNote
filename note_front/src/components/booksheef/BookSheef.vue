@@ -6,7 +6,7 @@
   <div style="margin-left: 10px">
     <category-bar @categorySelect="getNotes" ref="categoryBar">
     </category-bar>
-    <notes ref="notes" @editInfo="handleEditInfos">
+    <notes ref="notes" @editInfo="handleEditInfos" @addNote="handleAddNote">
     </notes>
     <note-edit-form ref="noteEditForm" @updateInfo="getNotes"></note-edit-form>
   </div>
@@ -47,7 +47,7 @@
       getNotes() {
         var _this = this;
         var categoryBarId = this.$refs.categoryBar.currentCid;
-        console.log("Get CategoryId Ok: " + categoryBarId);
+        // console.log("Get CategoryId Ok: " + categoryBarId);
         //根据id获取目录内容
         this.axios.get('categories/' + categoryBarId + '/notes')
           .then(function(response) {
@@ -60,8 +60,17 @@
       },
       handleEditInfos(noteInfo) {
         this.$refs.noteEditForm.dialogFormVisible = true;
+        this.$refs.noteEditForm.isCreate = false;
         this.$refs.noteEditForm.form = noteInfo;
       },
+      handleAddNote() {
+        var categoryBarId = this.$refs.categoryBar.currentCid;
+        this.$refs.noteEditForm.dialogFormVisible = true;
+        this.$refs.noteEditForm.isCreate = true;
+        this.$refs.noteEditForm.form = {};
+        this.$refs.noteEditForm.currentCategoryId = this.$refs.categoryBar.currentCid;
+      },
+
     }
   }
 </script>

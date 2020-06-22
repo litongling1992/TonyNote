@@ -10,7 +10,7 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="deleteNote">删除</el-button>
+        <el-button @click="cancleEditNote">取消</el-button>
         <el-button type="primary" @click="updateNote">确 定</el-button>
       </div>
     </el-dialog>
@@ -22,10 +22,12 @@
     name: 'NoteEditForm',
     data() {
       return {
+        isCreate:false,
         dialogFormVisible: false,
         form: {
 
         },
+        currentCategoryId:'',
 
         formLabelWidth: '120px'
       };
@@ -44,8 +46,16 @@
       updateNote() {
         var _this = this;
         console.log(this.form);
+        var url;
+        if (!_this.isCreate){
+          url = '/update/note/' + this.form.id+'/info';
+        }
+        else{
+          url = '/update/category/'+this.currentCategoryId.toString()+'/note/add';
 
-        this.axios.post('/update/note/' + this.form.id + '/info', this.form)
+        }
+        // console.log(url);
+        this.axios.post(url, this.form)
           .then(function(response) {
             if (response.data.status === 200) {
               _this.dialogFormVisible = false;
@@ -63,7 +73,9 @@
             _this.$message.error("编辑失败！" + erroe);
           })
       },
-      deleteNote() {},
+      cancleEditNote() {
+        this.dialogFormVisible = false;
+      },
     }
   }
 </script>

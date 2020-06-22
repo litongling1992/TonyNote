@@ -77,8 +77,42 @@ public class NoteController {
         Note note = noteService.getById(id);
         note.setName(requestNote.getName());
         note.setAbs(requestNote.getAbs());
+        note.setLastmodifedTime(new Timestamp(System.currentTimeMillis()));
         noteService.updateNoteInfo(note);
         return new Response(200,"更新成功",null);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/update/category/{id}/note/add")
+    @ResponseBody
+    public Response addNote(@RequestBody Note requestNote,@PathVariable("id") int id){
+        Note note = new Note();
+        note.setName(requestNote.getName());
+        note.setAbs(requestNote.getAbs());
+
+        Category category = categoryService.getById(id);
+        note.setCategory(category);
+
+        note.setLastmodifedTime(new Timestamp(System.currentTimeMillis()));
+        note.setCreateTime(new Timestamp(System.currentTimeMillis()));
+        noteService.updateNoteInfo(note);
+        return new Response(200,"添加成功",null);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/category/delete/{id}")
+    @ResponseBody
+    public Response deleteCategory(@PathVariable("id") int id){
+        categoryService.deleteById(id);
+        return new Response(200,"删除成功",null);
+    }
+
+    @CrossOrigin
+    @PostMapping("/api/note/delete/{id}")
+    @ResponseBody
+    public Response deleteNote(@PathVariable("id") int id){
+        noteService.deleteById(id);
+        return new Response(200,"删除成功",null);
     }
 
    /* @CrossOrigin

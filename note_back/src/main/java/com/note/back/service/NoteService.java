@@ -56,6 +56,10 @@ public class NoteService {
         noteDao.save(note);
     }
 
+    public void deleteById(int id) {
+        noteDao.deleteById(id);
+    }
+
     /*public Note getById(int id){
         return noteDao.findById(id).get();
     }
