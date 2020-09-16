@@ -52,7 +52,6 @@
         }
         else{
           url = '/update/category/'+this.currentCategoryId.toString()+'/note/add';
-
         }
         // console.log(url);
         this.axios.post(url, this.form)

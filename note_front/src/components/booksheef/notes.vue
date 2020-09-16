@@ -55,13 +55,7 @@
         this.$emit('addNote');
       },
       deleteNote(note) {
-        console.log(note);
-        var noteInfos = {
-          id: note.id,
-          abs: note.abs,
-          name: note.name,
-        }
-        this.$emit('editInfo', noteInfos);
+        
       },
     }
   }
